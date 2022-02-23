@@ -4,7 +4,7 @@ SET SERVEROUTPUT ON;
 CREATE OR REPLACE PACKAGE Ejemplo
 as
     PROCEDURE SP_CONSULTAR_OBRAS;
-    TYPE Persona as OBJECT(idUsuario INTEGER,nombre varchar(40));
+    
 END Ejemplo;
 
 CREATE OR REPLACE PACKAGE BODY Ejemplo
@@ -20,6 +20,7 @@ as
         END LOOP;
     
     END SP_CONSULTAR_OBRAS;
+    
 end Ejemplo;
 
 
