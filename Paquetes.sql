@@ -1,0 +1,30 @@
+
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE PACKAGE Ejemplo
+as
+    PROCEDURE SP_CONSULTAR_OBRAS;
+    TYPE Persona as OBJECT(idUsuario INTEGER,nombre varchar(40));
+END Ejemplo;
+
+CREATE OR REPLACE PACKAGE BODY Ejemplo
+as
+    PROCEDURE SP_CONSULTAR_OBRAS
+    IS
+        CURSOR CUR_OBRA IS (SELECT * FROM OBRA);
+        REG_OBRA OBRA%ROWTYPE;
+    BEGIN
+    
+        FOR REG_OBRA IN CUR_OBRA LOOP
+            DBMS_OUTPUT.PUT_LINE(REG_OBRA.NOMBRE);
+        END LOOP;
+    
+    END SP_CONSULTAR_OBRAS;
+end Ejemplo;
+
+
+BEGIN
+
+    ejemplo.sp_consultar_obras;
+
+END;
