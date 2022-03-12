@@ -93,3 +93,33 @@ END;
 
 
 SELECT fecha_diferencia(SYSDATE,'01/10/19') FROM DUAL;
+
+
+/* Desarrollar un procedimiento que visualice el apellido y la fecha de alta de todos los 
+empleados ordenados por apellido.
+*/
+
+
+
+CREATE TABLE EMPLEADOS(id number,nombre varchar(40), apellido varchar(40), fechaAlta date);
+
+alter table EMPLEADOS add constraint pkid primary key(id); 
+
+INSERT INTO EMPLEADOS VALUES(1,'Alfredo','Sánchez',sysdate);
+INSERT INTO EMPLEADOS VALUES(2,'Alondra','Verduzco',sysdate);
+INSERT INTO EMPLEADOS VALUES(3,'Sofia','Ingrid',sysdate);
+
+
+CREATE OR REPLACE PROCEDURE SP_LISTAR_EMPLEADOS
+IS
+    CURSOR C_EMPLEADOS IS SELECT * FROM EMPLEADOS ORDER BY APELLIDO DESC;
+BEGIN
+
+    FOR R_EMPLEADO IN C_EMPLEADOS LOOP
+        DBMS_OUTPUT.PUT_LINE(R_EMPLEADO.APELLIDO);
+    END LOOP;
+END;
+
+
+EXEC SP_LISTAR_EMPLEADOS
+
